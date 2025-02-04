@@ -9,16 +9,22 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player;
     public TextMeshProUGUI HPText;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPText.text = "HPText: 3";
+        HPText.text = "HP: 3";
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void HealthText(float currentHealth)
+    {
+        HPText.text = "HP: " + currentHealth;
     }
 }

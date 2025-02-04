@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 8787257046935617168}
   - component: {fileID: 1307543676087946307}
   m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 4029380813618156848}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.9523, z: -7.26}
-  m_LocalScale: {x: 1, y: 0.9123, z: 1.7852}
+  m_LocalPosition: {x: -0.20530826, y: 0.42230022, z: -6.8309593}
+  m_LocalScale: {x: 1, y: 0.9123, z: 0.95335037}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -139,7 +139,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &5707297753732867
 MonoBehaviour:
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 700
+  health: 2
 --- !u!95 &8787257046935617168
 Animator:
   serializedVersion: 7

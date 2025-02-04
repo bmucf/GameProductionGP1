@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Movement speed
-    public float rotationSpeed = 700f; // Rotation speed
+    public float moveSpeed = 10f;
+    public float rotationSpeed = 100f;
     Animator m_Animator;
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
+    public float health;
+
 
     void Start()
     {
@@ -19,13 +21,13 @@ public class PlayerMovement : MonoBehaviour
         Movement();
     }
 
-    
+
     void Movement()
     {
-        float horizontal = Input.GetAxis("Horizontal"); 
-        float vertical = Input.GetAxis("Vertical"); 
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        Vector3 Direction = new Vector3(horizontal, 0, vertical).normalized;
+        Vector3 Direction = new Vector3(horizontal, 0, vertical);
 
         if (Direction.magnitude >= 0.1f)
         {
@@ -36,9 +38,11 @@ public class PlayerMovement : MonoBehaviour
             m_Rigidbody.MovePosition(m_Rigidbody.position + move);
         }
 
+
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
         bool isWalking = hasHorizontalInput || hasVerticalInput;
+
         if (isWalking)
         {
             if (!m_AudioSource.isPlaying)
@@ -52,4 +56,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void GainHealth()
+    {
+        if (health <3)
+        {
+            health++;
+            GameObject.Find("GameManager").GetComponent<GameManager>().HealthText(health);
+        }
+       
+    }
 }
