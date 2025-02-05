@@ -20,11 +20,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
     }
 
     public void HealthText(float currentHealth)
     {
         HPText.text = "HP: " + currentHealth;
+    }
+
+    void QuitGame()
+    {
+        Debug.Log("Exiting the game!");
+        Application.Quit();
     }
 }
