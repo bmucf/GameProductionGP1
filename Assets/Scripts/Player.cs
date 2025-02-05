@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
     public float health;
-
+    public GameObject arrow;
+    public float projectileSpawnDist;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
+        Shooting();
     }
 
 
@@ -64,5 +66,15 @@ public class Player : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManager>().HealthText(health);
         }
        
+    }
+
+    void Shooting()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDist);
+            // Debug.Log("spawn Position: " + spawnPosition + "projectileSpawnDist: " + projectileSpawnDist);
+            Instantiate(arrow, spawnPosition, (transform.rotation * arrow.transform.rotation));
+        }
     }
 }
