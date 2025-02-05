@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPText.text = "HP: 3";
+        HPText.text = "HP: " + GameObject.Find("Player").GetComponent<Player>().health;
     }
 
     // Update is called once per frame
