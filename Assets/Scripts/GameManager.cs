@@ -14,17 +14,26 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HPText.text = "HP: 3";
+        HPText.text = "HP: " + GameObject.Find("Player").GetComponent<Player>().health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
     }
 
     public void HealthText(float currentHealth)
     {
         HPText.text = "HP: " + currentHealth;
+    }
+
+    void QuitGame()
+    {
+        Debug.Log("Exiting the game!");
+        Application.Quit();
     }
 }

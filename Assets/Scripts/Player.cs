@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 5000f;
     Animator m_Animator;
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
@@ -33,13 +33,18 @@ public class Player : MonoBehaviour
 
         if (Direction.magnitude >= 0.1f)
         {
+            
             Quaternion Rotation = Quaternion.LookRotation(Direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Rotation, rotationSpeed * Time.deltaTime);
 
-            Vector3 move = transform.forward * moveSpeed * Time.deltaTime;
-            m_Rigidbody.MovePosition(m_Rigidbody.position + move);
+            
+            if (Quaternion.Angle(transform.rotation, Rotation) < 5f)
+            {
+                Vector3 move = transform.forward * moveSpeed * Time.deltaTime;
+                m_Rigidbody.MovePosition(m_Rigidbody.position + move);
+            }
         }
-
+        
 
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
