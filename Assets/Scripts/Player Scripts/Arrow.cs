@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class Arrow : MonoBehaviour
 {
     public float speed = 8f;
+    public LayerMask Enemy;
+    public LayerMask Pot;
+    public int enemyDMG = 2; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +29,31 @@ public class Arrow : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-       Debug.Log("arrow hit " + other.gameObject.name);
-        Destroy(gameObject);
+        int otherLayer = other.gameObject.layer;
+        string layerName = LayerMask.LayerToName(otherLayer);
+
+        if (((1 << otherLayer) & Enemy) != 0)
+        {
+            if (other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
+            {
+                enemy.TakeDamage(enemyDMG);
+                Debug.Log("Arrow hit enemy and did " + enemyDMG + "damage");
+            }
+            Destroy(gameObject);
+        }
+
+        else if (((1 << otherLayer) & Pot) != 0)
+        {
+            if (other.gameObject.TryGetComponent<BreakableObject>(out BreakableObject pot))
+            {
+                pot.Break();
+                Debug.Log("Arrow hit pot and destroyed it");
+            }
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

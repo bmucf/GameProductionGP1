@@ -2319,6 +2319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2740954497608282551, guid: 22977d4d4ec0f1048890c9c13bd1ad15, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1724695742}
     - target: {fileID: 3054462217432798486, guid: 22977d4d4ec0f1048890c9c13bd1ad15, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2371,6 +2375,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1724695742}
+    - target: {fileID: 8159164618540690192, guid: 22977d4d4ec0f1048890c9c13bd1ad15, type: 3}
+      propertyPath: m_VersionIndex
+      value: 1414
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3180,7 +3188,7 @@ PrefabInstance:
       objectReference: {fileID: 282589156}
     - target: {fileID: 8159164618540690192, guid: 22977d4d4ec0f1048890c9c13bd1ad15, type: 3}
       propertyPath: m_VersionIndex
-      value: 1414
+      value: 1417
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
