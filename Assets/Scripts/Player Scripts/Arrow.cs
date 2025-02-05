@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
     public float speed = 8f;
     public LayerMask Enemy;
     public LayerMask Pot;
+    public LayerMask Target;
     public int enemyDMG = 2; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,6 +49,16 @@ public class Arrow : MonoBehaviour
             {
                 pot.Break();
                 Debug.Log("Arrow hit pot and destroyed it");
+            }
+            Destroy(gameObject);
+        }
+
+        else if (((1 << otherLayer) & Target) != 0)
+        {
+            if (other.gameObject.TryGetComponent<Target>(out Target target))
+            {
+                target.Activate();
+                Debug.Log("Arrow hit target and activated it");
             }
             Destroy(gameObject);
         }

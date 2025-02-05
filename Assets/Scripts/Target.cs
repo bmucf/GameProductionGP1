@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class Switch : MonoBehaviour
+public class Target : MonoBehaviour
 {
     public bool isActivated = false;
     public float DeactivateTime = 5f;
 
-    public Material activeMaterial; 
+    public Material activeMaterial;
     public Material notActiveMaterial;
     private Renderer objectRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        objectRenderer = GetComponent<Renderer>();  
+        objectRenderer = GetComponent<Renderer>(); 
         if (objectRenderer != null && notActiveMaterial != null)
         {
             objectRenderer.material = notActiveMaterial; 
@@ -27,14 +27,14 @@ public class Switch : MonoBehaviour
 
     public void Activate()
     {
-        if(!isActivated)
+        if (!isActivated)
         {
             Debug.Log("Activated Switch");
             isActivated = true;
             Invoke("Deactivate", DeactivateTime);
             ChangeMaterial(activeMaterial);
         }
-        
+
     }
 
     public void Deactivate()

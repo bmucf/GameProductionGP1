@@ -156,4 +156,7 @@ MonoBehaviour:
   Pot:
     serializedVersion: 2
     m_Bits: 256
+  Target:
+    serializedVersion: 2
+    m_Bits: 512
   enemyDMG: 2
