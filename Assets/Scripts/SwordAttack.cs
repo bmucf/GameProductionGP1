@@ -3,7 +3,7 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     public float cooldown = 0.5f;
-    public float spinHoldKeyTime = 1f;
+    public float spinHoldKeyTime = 1.5f;
     public Transform slashAttackPoint;
     public Transform spinAttackPoint;
     public float slashAttackRange = 1f;
@@ -67,7 +67,7 @@ public class SwordAttack : MonoBehaviour
             // Enemy Check
            if (obj.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
             {
-               // enemy.TakeDamage(slashAttackDmg);
+                enemy.TakeDamage(slashAttackDmg);
             }
 
             // Switch Check
@@ -88,7 +88,7 @@ public class SwordAttack : MonoBehaviour
             // Enemy Check
             if (obj.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
             {
-                // enemy.TakeDamage(spinAttackDmg);
+                enemy.TakeDamage(spinAttackDmg);
             }
 
             //Switch Check
