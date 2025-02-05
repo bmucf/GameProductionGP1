@@ -3,10 +3,10 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     public float cooldown = 0.5f;
-    public float spinHoldKeyTime = 1.5f;
+    public float spinHoldKeyTime = 1f;
     public Transform slashAttackPoint;
     public Transform spinAttackPoint;
-    public float slashAttackRange = 1f;
+    public float slashAttackRange = 1.5f;
     public int slashAttackDmg = 2;
     public float spinAttackRange = 2f;
     public int spinAttackDmg = 1;
@@ -15,7 +15,7 @@ public class SwordAttack : MonoBehaviour
 
     private float nextAttackTime = 0f;
     private float buttonHoldTime = 0f;
-    private bool isHoldingAttack = false;
+   // private bool isHoldingAttack = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,12 +31,12 @@ public class SwordAttack : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                isHoldingAttack = true;
+            //    isHoldingAttack = true;
                 buttonHoldTime = Time.time;
             }
             if (Input.GetButtonUp("Fire1"))
             {
-                isHoldingAttack = false;
+             //   isHoldingAttack = false;
 
                 // Check if slash or spin
                 if (Time.time - buttonHoldTime >= spinHoldKeyTime)
@@ -50,10 +50,10 @@ public class SwordAttack : MonoBehaviour
                     nextAttackTime = Time.time + cooldown;
                 }
             }
-            if (isHoldingAttack)
-            {
-                Debug.Log("Holding Attack");
-            }
+           // if (isHoldingAttack)
+           // {
+           //    Debug.Log("Holding Attack");
+           // }
         }
     }
 
@@ -75,6 +75,12 @@ public class SwordAttack : MonoBehaviour
             {
                 switchComponent.Activate();
             }
+
+            // Pot Check
+            if (obj.TryGetComponent<BreakableObject>(out BreakableObject breakable))
+            {
+                breakable.Break();
+            }
         }
     }
 
@@ -95,6 +101,12 @@ public class SwordAttack : MonoBehaviour
             if (obj.TryGetComponent<Switch>(out Switch switchComponent))
             {
                 switchComponent.Activate();
+            }
+
+            // Pot Check
+            if (obj.TryGetComponent<BreakableObject>(out BreakableObject breakable))
+            {
+                breakable.Break();
             }
         }
     }

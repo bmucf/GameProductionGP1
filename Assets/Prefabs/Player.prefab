@@ -293,16 +293,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0.5
-  spinHoldKeyTime: 2
+  spinHoldKeyTime: 1
   slashAttackPoint: {fileID: 6516902148896650719}
   spinAttackPoint: {fileID: 1068478130282871610}
-  slashAttackRange: 1
+  slashAttackRange: 1.5
   slashAttackDmg: 2
   spinAttackRange: 2
   spinAttackDmg: 1
   attackable:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 448
 --- !u!1 &8358213984380024598
 GameObject:
   m_ObjectHideFlags: 0
