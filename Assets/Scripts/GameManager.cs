@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
         {
             QuitGame();
         }
+
+        if (player.GetComponent<Player>().health <= 0)
+        {
+            SceneManager.LoadScene("LoseScreen");
+        }
     }
 
     public void HealthText(float currentHealth)
