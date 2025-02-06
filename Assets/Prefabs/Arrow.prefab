@@ -159,4 +159,4 @@ MonoBehaviour:
   Target:
     serializedVersion: 2
     m_Bits: 512
-  enemyDMG: 2
+  enemyDMG: 1

@@ -10,17 +10,14 @@ public class Arrow : MonoBehaviour
     public LayerMask Target;
     public int enemyDMG = 2; 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Destroy(gameObject, 5f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveForward();
-        
     }
 
     void MoveForward()
@@ -33,16 +30,41 @@ public class Arrow : MonoBehaviour
         int otherLayer = other.gameObject.layer;
         string layerName = LayerMask.LayerToName(otherLayer);
 
+        // Check if it hit an enemy
         if (((1 << otherLayer) & Enemy) != 0)
         {
-            if (other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
+            if (other.gameObject.TryGetComponent<EnemyMovement>(out EnemyMovement enemy))
             {
+                // Apply damage to the enemy
                 enemy.TakeDamage(enemyDMG);
-                Debug.Log("Arrow hit enemy and did " + enemyDMG + "damage");
+                Debug.Log("Arrow hit enemy and did " + enemyDMG + " damage");
             }
             Destroy(gameObject);
         }
 
+        if (((1 << otherLayer) & Enemy) != 0)
+        {
+            if (other.gameObject.TryGetComponent<EnemyShooter>(out EnemyShooter enemyShooter))
+            {
+                // Apply damage to the enemy
+                enemyShooter.TakeDamage(enemyDMG);
+                Debug.Log("Arrow hit enemy and did " + enemyDMG + " damage");
+            }
+            Destroy(gameObject);
+        }
+
+        if (((1 << otherLayer) & Enemy) != 0)
+        {
+            if (other.gameObject.TryGetComponent<Boss>(out Boss boss))
+            {
+                // Apply damage to the enemy
+                boss.TakeDamage(enemyDMG);
+                Debug.Log("Arrow hit enemy and did " + enemyDMG + " damage");
+            }
+            Destroy(gameObject);
+        }
+
+        // Check if it hit a pot
         else if (((1 << otherLayer) & Pot) != 0)
         {
             if (other.gameObject.TryGetComponent<BreakableObject>(out BreakableObject pot))
@@ -53,6 +75,7 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // Check if it hit a target
         else if (((1 << otherLayer) & Target) != 0)
         {
             if (other.gameObject.TryGetComponent<Target>(out Target target))
@@ -62,6 +85,8 @@ public class Arrow : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        // Destroy the arrow if it hits anything else
         else
         {
             Destroy(gameObject);
