@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float health;
     public GameObject arrow;
     public float projectileSpawnDist;
+    public bool isBlocking = false;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     {
         Movement();
         Shooting();
+        Blocking();
     }
 
 
@@ -80,6 +82,20 @@ public class Player : MonoBehaviour
             Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDist);
             // Debug.Log("spawn Position: " + spawnPosition + "projectileSpawnDist: " + projectileSpawnDist);
             Instantiate(arrow, spawnPosition, (transform.rotation * arrow.transform.rotation));
+        }
+    }
+
+    void Blocking()
+    {
+        if (Input.GetButton("Fire2"))
+        {
+            isBlocking = true;
+            
+        }
+        else
+        {
+            isBlocking = false;
+            
         }
     }
 }
