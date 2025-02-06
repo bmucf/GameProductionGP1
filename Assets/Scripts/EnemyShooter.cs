@@ -12,6 +12,8 @@ public class EnemyShooter : MonoBehaviour
     public float activationDistance = 10f;
     private bool isActivated = false;
 
+    public int health = 2;
+
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
@@ -46,5 +48,20 @@ public class EnemyShooter : MonoBehaviour
 
             projectile.GetComponent<Projectile>().SetDirection(direction);
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

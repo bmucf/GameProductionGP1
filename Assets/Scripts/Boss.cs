@@ -13,6 +13,8 @@ public class Boss : MonoBehaviour
     private Vector3 chargeDirection;
     private bool isCharging = false;
 
+    public int health = 20; 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -50,5 +52,20 @@ public class Boss : MonoBehaviour
         chargeDirection = (player.position - transform.position).normalized;
 
         isCharging = true;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

@@ -13,32 +13,26 @@ public class SwordAttack : MonoBehaviour
 
     public LayerMask attackable;
 
+    public GameObject swordPrefab;
+    public float swordSpawnDistance = .5f;
+    public float swordLifetime = .1f;
+    public int numSpinSwords = 8;
+    public float spinRadius = 1f;
+
     private float nextAttackTime = 0f;
     private float buttonHoldTime = 0f;
-   // private bool isHoldingAttack = false;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Time.time >= nextAttackTime)
         {
             if (Input.GetButtonDown("Fire1"))
             {
-            //    isHoldingAttack = true;
                 buttonHoldTime = Time.time;
             }
+
             if (Input.GetButtonUp("Fire1"))
             {
-             //   isHoldingAttack = false;
-
-                // Check if slash or spin
                 if (Time.time - buttonHoldTime >= spinHoldKeyTime)
                 {
                     SpinAttack();
@@ -50,33 +44,43 @@ public class SwordAttack : MonoBehaviour
                     nextAttackTime = Time.time + cooldown;
                 }
             }
-           // if (isHoldingAttack)
-           // {
-           //    Debug.Log("Holding Attack");
-           // }
         }
     }
 
     void Slash()
     {
-        Debug.Log("Slash");
+        Vector3 spawnPosition = slashAttackPoint.position + slashAttackPoint.forward * swordSpawnDistance;
+
+        GameObject slashSword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
+
+        slashSword.transform.rotation = Quaternion.LookRotation(transform.forward);
+
+        Destroy(slashSword, swordLifetime);
+
         Collider[] hitObjects = Physics.OverlapSphere(slashAttackPoint.position, slashAttackRange, attackable);
 
         foreach (Collider obj in hitObjects)
         {
-            // Enemy Check
-           if (obj.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
+            if (obj.TryGetComponent<EnemyMovement>(out EnemyMovement enemyMovement))
             {
-                enemy.TakeDamage(slashAttackDmg);
+                enemyMovement.TakeDamage(slashAttackDmg);
             }
 
-            // Switch Check
+            if (obj.TryGetComponent<EnemyShooter>(out EnemyShooter enemyShooter))
+            {
+                enemyShooter.TakeDamage(slashAttackDmg);
+            }
+
+            if (obj.TryGetComponent<Boss>(out Boss boss))
+            {
+                enemyShooter.TakeDamage(slashAttackDmg);
+            }
+
             if (obj.TryGetComponent<Switch>(out Switch switchComponent))
             {
                 switchComponent.Activate();
             }
 
-            // Pot Check
             if (obj.TryGetComponent<BreakableObject>(out BreakableObject breakable))
             {
                 breakable.Break();
@@ -86,44 +90,61 @@ public class SwordAttack : MonoBehaviour
 
     void SpinAttack()
     {
-        Debug.Log("Spin");
-        Collider[] hitObjects = Physics.OverlapSphere(spinAttackPoint.position, spinAttackRange, attackable);
-
-        foreach (Collider obj in hitObjects)
+        for (int i = 0; i < numSpinSwords; i++)
         {
-            // Enemy Check
-            if (obj.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
-            {
-                enemy.TakeDamage(spinAttackDmg);
-            }
+            float angle = i * Mathf.PI * 2f / numSpinSwords;
+            Vector3 spawnPosition = spinAttackPoint.position + new Vector3(Mathf.Cos(angle) * spinRadius, 0f, Mathf.Sin(angle) * spinRadius);
 
-            //Switch Check
-            if (obj.TryGetComponent<Switch>(out Switch switchComponent))
-            {
-                switchComponent.Activate();
-            }
+            GameObject spinSword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
 
-            // Pot Check
-            if (obj.TryGetComponent<BreakableObject>(out BreakableObject breakable))
+            Vector3 directionToCenter = (spinAttackPoint.position - spawnPosition).normalized;
+            spinSword.transform.rotation = Quaternion.LookRotation(directionToCenter);
+
+            Destroy(spinSword, swordLifetime);
+
+            Collider[] hitObjects = Physics.OverlapSphere(spinAttackPoint.position, spinAttackRange, attackable);
+
+            foreach (Collider obj in hitObjects)
             {
-                breakable.Break();
+                if (obj.TryGetComponent<EnemyMovement>(out EnemyMovement enemyMovement))
+                {
+                    enemyMovement.TakeDamage(spinAttackDmg);
+                }
+
+                if (obj.TryGetComponent<EnemyShooter>(out EnemyShooter enemyShooter))
+                {
+                    enemyShooter.TakeDamage(spinAttackDmg);
+                }
+
+                if (obj.TryGetComponent<Boss>(out Boss boss))
+                {
+                    boss.TakeDamage(spinAttackDmg);
+                }
+
+                if (obj.TryGetComponent<Switch>(out Switch switchComponent))
+                {
+                    switchComponent.Activate();
+                }
+
+                if (obj.TryGetComponent<BreakableObject>(out BreakableObject breakable))
+                {
+                    breakable.Break();
+                }
             }
         }
     }
 
-    //Draw Gizmos for Debugging
+    // Draw Gizmos for debugging
     void OnDrawGizmosSelected()
     {
         if (slashAttackPoint != null)
         {
-            // slash gizmo
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(slashAttackPoint.position, slashAttackRange);
         }
 
         if (spinAttackPoint != null)
         {
-            // spin gizmo
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(spinAttackPoint.position, spinAttackRange);
         }
