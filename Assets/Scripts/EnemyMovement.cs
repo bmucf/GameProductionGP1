@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public float gridSize = 1f;
     public float movementDelay = 0.5f;
     public float activationDistance = 5f;
+    public int health = 8;
 
     private Transform player;
     private Vector3 targetPosition;
@@ -18,7 +19,6 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-
         targetPosition = transform.position;
     }
 
@@ -65,5 +65,22 @@ public class EnemyMovement : MonoBehaviour
 
         isMoving = false;
         isWaiting = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("Enemy took damage! Remaining health: " + health);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Enemy died!");
+        Destroy(gameObject);
     }
 }
