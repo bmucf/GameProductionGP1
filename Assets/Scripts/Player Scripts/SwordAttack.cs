@@ -73,7 +73,7 @@ public class SwordAttack : MonoBehaviour
 
             if (obj.TryGetComponent<Boss>(out Boss boss))
             {
-                enemyShooter.TakeDamage(slashAttackDmg);
+                boss.TakeDamage(slashAttackDmg);
             }
 
             if (obj.TryGetComponent<Switch>(out Switch switchComponent))
