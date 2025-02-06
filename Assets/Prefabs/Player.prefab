@@ -158,8 +158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 5000
-  health: 1
-  arrow: {fileID: 8742611483205305724, guid: 4b77c228b10235a418c1bb9b1bf3c6b8, type: 3}
+  health: 3
+  arrow: {fileID: 6953278783803502581, guid: 546f214e15d4b1d4c99822dea9602290, type: 3}
   projectileSpawnDist: 2
 --- !u!95 &8787257046935617168
 Animator:
