@@ -1497,8 +1497,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5707297753732867, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
+      propertyPath: Bow
+      value: 
+      objectReference: {fileID: 3948181530843580073, guid: 0371d826389b15c43913ef6a412dad83, type: 3}
+    - target: {fileID: 5707297753732867, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
       propertyPath: health
-      value: 10000
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5707297753732867, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
       propertyPath: hasCrossbow
@@ -1554,7 +1558,7 @@ PrefabInstance:
       objectReference: {fileID: 8559818693866941724, guid: 8804c17000e31e843a483a0f6f1eed0f, type: 3}
     - target: {fileID: 5983552290087559553, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
       propertyPath: swordLifetime
-      value: 0.05
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

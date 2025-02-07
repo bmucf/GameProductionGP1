@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
     public float arrowShotCooldown = 1f;
     private float shootingTime = 0f;
 
+    public GameObject Bow;
+    public float bowSpawnDistance = 1f;
+    private GameObject CreatedBow;
+
     public bool isInvulnerable = false;
     private float invulnerabilityDuration = 1;
 
@@ -124,6 +128,10 @@ public class Player : MonoBehaviour
             Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDistance);
             // Debug.Log("spawn Position: " + spawnPosition + "projectileSpawnDist: " + projectileSpawnDist);
             Instantiate(arrow, spawnPosition, (transform.rotation * arrow.transform.rotation));
+
+            Vector3 bowPosition = transform.position + (transform.forward * bowSpawnDistance);
+            GameObject createdBow = Instantiate(Bow, bowPosition, transform.rotation * Bow.transform.rotation);
+            Destroy(createdBow, 0.25f);
         }
     }
 
