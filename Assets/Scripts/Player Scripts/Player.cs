@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +12,10 @@ public class Player : MonoBehaviour
     public float health;
     public GameObject arrow;
     public float projectileSpawnDist;
+    public bool isBlocking = false;
+
+    public bool isInvulnerable = false;
+    private float invulnerabilityDuration = 1;
 
     void Start()
     {
@@ -21,8 +27,8 @@ public class Player : MonoBehaviour
     {
         Movement();
         Shooting();
+        Blocking();
     }
-
 
     void Movement()
     {
@@ -33,18 +39,15 @@ public class Player : MonoBehaviour
 
         if (Direction.magnitude >= 0.1f)
         {
-            
             Quaternion Rotation = Quaternion.LookRotation(Direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Rotation, rotationSpeed * Time.deltaTime);
 
-            
             if (Quaternion.Angle(transform.rotation, Rotation) < 5f)
             {
                 Vector3 move = transform.forward * moveSpeed * Time.deltaTime;
                 m_Rigidbody.MovePosition(m_Rigidbody.position + move);
             }
         }
-        
 
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
@@ -65,12 +68,37 @@ public class Player : MonoBehaviour
 
     public void GainHealth()
     {
-        if (health <3)
+        if (health < 3)
         {
             health++;
             GameObject.Find("GameManager").GetComponent<GameManager>().HealthText(health);
         }
-       
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (isInvulnerable)
+            return;
+
+        health -= damage;
+        GameObject.Find("GameManager").GetComponent<GameManager>().HealthText(health);
+
+        if (health <= 0)
+        {
+            Debug.Log("Player is dead");
+        }
+        else
+        {
+            Debug.Log("Player health: " + health);
+            StartCoroutine(Invulnerability());
+        }
+    }
+
+    private IEnumerator Invulnerability()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        isInvulnerable = false;
     }
 
     void Shooting()
@@ -78,8 +106,19 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDist);
-            // Debug.Log("spawn Position: " + spawnPosition + "projectileSpawnDist: " + projectileSpawnDist);
             Instantiate(arrow, spawnPosition, (transform.rotation * arrow.transform.rotation));
+        }
+    }
+
+    void Blocking()
+    {
+        if (Input.GetButton("Fire2"))
+        {
+            isBlocking = true;
+        }
+        else
+        {
+            isBlocking = false;
         }
     }
 }

@@ -12,20 +12,25 @@ public class Boss : MonoBehaviour
     private Transform player;
     private Vector3 chargeDirection;
     private bool isCharging = false;
+    private bool hasActivated = false;
+    private float initialY;
 
     public int health = 20; 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        initialY = transform.position.y;
     }
 
     void Update()
     {
-        if (!isCharging && Vector3.Distance(transform.position, player.position) <= activationDistance)
+        if (!hasActivated && Vector3.Distance(transform.position, player.position) <= activationDistance)
         {
+            hasActivated = true;
             isCharging = true;
             chargeDirection = (player.position - transform.position).normalized;
+            Debug.Log("Boss has been activated and starts charging.");
         }
 
         if (isCharging)
@@ -36,8 +41,10 @@ public class Boss : MonoBehaviour
 
     void Charge()
     {
-        transform.Translate(chargeDirection * moveSpeed * Time.deltaTime);
-
+        Vector3 newPosition = transform.position + chargeDirection * moveSpeed * Time.deltaTime;
+        newPosition.y = initialY;
+        transform.position = newPosition;
+       
         if (Physics.Raycast(transform.position, chargeDirection, 1f, wallLayer))
         {
             isCharging = false;
@@ -52,6 +59,19 @@ public class Boss : MonoBehaviour
         chargeDirection = (player.position - transform.position).normalized;
 
         isCharging = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player playerScript = other.GetComponent<Player>();
+
+            if (!playerScript.isInvulnerable)
+            {
+                playerScript.TakeDamage(1);
+            }
+        }
     }
 
     public void TakeDamage(int damage)

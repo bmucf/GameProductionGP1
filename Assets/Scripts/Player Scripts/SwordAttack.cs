@@ -98,11 +98,15 @@ public class SwordAttack : MonoBehaviour
             GameObject spinSword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
 
             Vector3 directionToCenter = (spinAttackPoint.position - spawnPosition).normalized;
-            spinSword.transform.rotation = Quaternion.LookRotation(directionToCenter);
+
+            Quaternion rotation = Quaternion.LookRotation(directionToCenter) * Quaternion.Euler(0f, 180f, 0f);
+
+            spinSword.transform.rotation = rotation;
 
             Destroy(spinSword, swordLifetime);
+        }
 
-            Collider[] hitObjects = Physics.OverlapSphere(spinAttackPoint.position, spinAttackRange, attackable);
+        Collider[] hitObjects = Physics.OverlapSphere(spinAttackPoint.position, spinAttackRange, attackable);
 
             foreach (Collider obj in hitObjects)
             {
@@ -131,7 +135,6 @@ public class SwordAttack : MonoBehaviour
                     breakable.Break();
                 }
             }
-        }
     }
 
     // Draw Gizmos for debugging
