@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
 
     void MakeAShield()
     {
-        Vector3 shieldPosition = transform.position + transform.forward * shieldSpawnDistance;
+        Vector3 shieldPosition = transform.position + transform.up * 2 + transform.forward * shieldSpawnDistance;
         CreatedShield = Instantiate(Shield, shieldPosition, transform.rotation * Shield.transform.rotation);
         CreatedShield.transform.SetParent(transform); 
     }
