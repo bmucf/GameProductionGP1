@@ -876,7 +876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5222967
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1498,7 +1498,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5707297753732867, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
       propertyPath: health
-      value: 1
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2177552919861891982, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1548,6 +1548,10 @@ PrefabInstance:
       propertyPath: swordPrefab
       value: 
       objectReference: {fileID: 8559818693866941724, guid: 8804c17000e31e843a483a0f6f1eed0f, type: 3}
+    - target: {fileID: 5983552290087559553, guid: 0a3aacd175f0b1e4f8f9e8554454977e, type: 3}
+      propertyPath: swordLifetime
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2857,7 +2861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5222958
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7078,7 +7082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52229553
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.z

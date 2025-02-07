@@ -8,14 +8,22 @@ public class Projectile : MonoBehaviour
     private Vector3 direction;
     private float timer;
 
+    private float fixedY;
+
     public void SetDirection(Vector3 dir)
     {
         direction = dir;
+        fixedY = transform.position.y;
     }
 
     void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        Vector3 movement = direction * speed * Time.deltaTime;
+        movement.y = 0;
+
+        transform.Translate(movement, Space.World);
+
+        transform.position = new Vector3(transform.position.x, fixedY, transform.position.z);
 
         timer += Time.deltaTime;
 
@@ -25,10 +33,16 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.TakeDamage(1);
+            }
+
             Destroy(gameObject);
         }
     }
