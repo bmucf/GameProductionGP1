@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    public float gridSize = 1f;
     public float movementDelay = 0.5f;
     public float activationDistance = 5f;
     public int health = 8;
@@ -15,6 +14,8 @@ public class EnemyMovement : MonoBehaviour
     private bool isMoving = false;
     private bool isWaiting = false;
     private bool isActivated = false;
+
+    public float randomOffsetRange = 1.5f;
 
     void Start()
     {
@@ -38,17 +39,10 @@ public class EnemyMovement : MonoBehaviour
         {
             if (!isMoving && !isWaiting)
             {
-                targetPosition = GetNearestGridPosition(player.position);
+                targetPosition = player.position + new Vector3(Random.Range(-randomOffsetRange, randomOffsetRange), 0f, Random.Range(-randomOffsetRange, randomOffsetRange));
                 StartCoroutine(MoveWithDelay());
             }
         }
-    }
-
-    Vector3 GetNearestGridPosition(Vector3 position)
-    {
-        float x = Mathf.Round(position.x / gridSize) * gridSize;
-        float z = Mathf.Round(position.z / gridSize) * gridSize;
-        return new Vector3(x, transform.position.y, z);
     }
 
     IEnumerator MoveWithDelay()
@@ -67,6 +61,19 @@ public class EnemyMovement : MonoBehaviour
         isWaiting = false;
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player playerScript = other.GetComponent<Player>();
+
+            if (!playerScript.isInvulnerable)
+            {
+                playerScript.TakeDamage(1);
+            }
+        }
+    }
+    
     public void TakeDamage(int damage)
     {
         health -= damage;
