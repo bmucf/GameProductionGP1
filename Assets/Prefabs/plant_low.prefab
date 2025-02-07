@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8750314094181744044, guid: 822503482ecc66b4597d1dbc90ff7a57, type: 3}
   shootingInterval: 2
-  activationDistance: 10
+  activationDistance: 15
   health: 2
 --- !u!114 &7604773476132279901
 MonoBehaviour:
