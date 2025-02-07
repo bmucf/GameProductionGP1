@@ -25,7 +25,7 @@ public class Arrow : MonoBehaviour
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         int otherLayer = other.gameObject.layer;
         string layerName = LayerMask.LayerToName(otherLayer);
@@ -63,9 +63,15 @@ public class Arrow : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
 
+    void OnCollisionEnter(Collision other)
+    {
+
+        int otherLayer = other.gameObject.layer;
+        string layerName = LayerMask.LayerToName(otherLayer);
         // Check if it hit a pot
-        else if (((1 << otherLayer) & Pot) != 0)
+        if (((1 << otherLayer) & Pot) != 0)
         {
             if (other.gameObject.TryGetComponent<BreakableObject>(out BreakableObject pot))
             {
