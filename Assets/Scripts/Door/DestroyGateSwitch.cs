@@ -5,7 +5,6 @@ public class DestroyGateSwitch : MonoBehaviour
     public GameObject SwitchOne;
     public GameObject SwitchTwo;
     public GameObject SwitchThree;
-    public GameObject SwitchFour;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,12 +15,27 @@ public class DestroyGateSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RemoveGate();
+        if(SwitchTwo != null && SwitchThree != null)
+        {
+            RemoveGate();
+        }
+        else if (SwitchTwo == null && SwitchThree == null)
+        {
+            RemoveSoloGate();
+        }
     }
 
     public void RemoveGate()
     {
-        if (SwitchOne.GetComponent<Switch>().isActivated == true && SwitchTwo.GetComponent<Switch>().isActivated == true && SwitchThree.GetComponent<Switch>().isActivated == true && SwitchFour.GetComponent<Switch>().isActivated == true)
+        if (SwitchOne.GetComponent<Switch>().isActivated == true && SwitchTwo.GetComponent<Switch>().isActivated == true && SwitchThree.GetComponent<Switch>().isActivated == true)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void RemoveSoloGate()
+    {
+        if (SwitchOne.GetComponent<Switch>().isActivated == true)
         {
             Destroy(gameObject);
         }
