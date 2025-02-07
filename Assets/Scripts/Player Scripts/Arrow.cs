@@ -92,7 +92,7 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // Destroy the arrow if it hits anything else
+        
         else
         {
             Destroy(gameObject);

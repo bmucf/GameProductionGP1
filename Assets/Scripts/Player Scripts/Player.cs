@@ -154,6 +154,11 @@ public class Player : MonoBehaviour
                 DestroyAShield();
             }
         }
+
+        if(isBlocking == true && m_AudioSource.isPlaying)
+        {
+            m_AudioSource.Stop();
+        }
     }
 
     void MakeAShield()
