@@ -11,8 +11,14 @@ public class Player : MonoBehaviour
     AudioSource m_AudioSource;
     public float health;
     public GameObject arrow;
-    public float projectileSpawnDist;
+    public float projectileSpawnDistance = 2f;
     public bool isBlocking = false;
+    public bool hasCrossbow = false;
+    public GameObject Shield;
+    public float shieldSpawnDistance = 1f;
+    private GameObject CreatedShield;
+    public float arrowShotCooldown = 1f;
+    private float shootingTime = 0f;
 
     public bool isInvulnerable = false;
     private float invulnerabilityDuration = 1;
@@ -25,8 +31,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Movement();
-        Shooting();
+        if (isBlocking == false)
+        {
+            Movement();
+        }
+        
+        if (hasCrossbow == true)
+        {
+            Shooting();
+        }
+        
         Blocking();
     }
 
@@ -103,9 +117,12 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= shootingTime)
         {
-            Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDist);
+
+            shootingTime = Time.time + arrowShotCooldown;
+            Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDistance);
+            // Debug.Log("spawn Position: " + spawnPosition + "projectileSpawnDist: " + projectileSpawnDist);
             Instantiate(arrow, spawnPosition, (transform.rotation * arrow.transform.rotation));
         }
     }
@@ -114,11 +131,36 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButton("Fire2"))
         {
-            isBlocking = true;
+
+            if(!isBlocking)
+            {
+                isBlocking = true;
+                MakeAShield();
+            }
         }
         else
         {
-            isBlocking = false;
+            if(isBlocking)
+            {
+                isBlocking = false;
+                DestroyAShield();
+            }
+        }
+    }
+
+    void MakeAShield()
+    {
+        Vector3 shieldPosition = transform.position + transform.forward * shieldSpawnDistance;
+        CreatedShield = Instantiate(Shield, shieldPosition, transform.rotation * Shield.transform.rotation);
+        CreatedShield.transform.SetParent(transform); 
+    }
+
+    void DestroyAShield()
+    {
+        if (CreatedShield != null)
+        {
+            Destroy(CreatedShield);
+            CreatedShield = null;
         }
     }
 }

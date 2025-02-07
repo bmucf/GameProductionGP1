@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5912997952524030271}
   - component: {fileID: 2693806165835840701}
   - component: {fileID: 5998854861423510152}
-  - component: {fileID: 721190499509724609}
+  - component: {fileID: -3317511898614604095}
   m_Layer: 0
   m_Name: PlantShot
   m_TagString: Untagged
@@ -109,7 +109,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &721190499509724609
+--- !u!114 &-3317511898614604095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
