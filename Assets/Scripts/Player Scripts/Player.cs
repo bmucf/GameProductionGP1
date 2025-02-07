@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 10f;
+    public bool isWalking = false;
     public float rotationSpeed = 5000f;
     Animator m_Animator;
     Rigidbody m_Rigidbody;
@@ -50,7 +51,47 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        if (Input.GetKey(KeyCode.A))
+        {
+            isWalking = true;
+            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0, Space.World);
+            Quaternion rotation = new Quaternion();
+            rotation.eulerAngles = new Vector3(0, -90, 0);
+            transform.rotation = rotation;
+        }
+        else 
+        {
+            isWalking = false;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            isWalking = true;
+            transform.Translate(moveSpeed * Time.deltaTime, 0, 0, Space.World);
+            Quaternion rotation = new Quaternion();
+            rotation.eulerAngles = new Vector3(0, 90, 0);
+            transform.rotation = rotation;
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            isWalking = true;
+            transform.Translate(0, 0, moveSpeed * Time.deltaTime, Space.World);
+            Quaternion rotation = new Quaternion();
+            rotation.eulerAngles = new Vector3(0, 0, 0);
+            transform.rotation = rotation;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            isWalking = true;
+            transform.Translate(0, 0, -moveSpeed * Time.deltaTime, Space.World);
+            Quaternion rotation = new Quaternion();
+            rotation.eulerAngles = new Vector3(0, 180, 0);
+            transform.rotation = rotation;
+        }
+
+        /*float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 Direction = new Vector3(horizontal, 0, vertical);
@@ -69,7 +110,7 @@ public class Player : MonoBehaviour
 
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
-        bool isWalking = hasHorizontalInput || hasVerticalInput;
+        bool isWalking = hasHorizontalInput || hasVerticalInput;*/
 
         if (isWalking)
         {
@@ -82,7 +123,7 @@ public class Player : MonoBehaviour
         {
             m_AudioSource.Stop();
         }
-    }
+        }
 
     public void GainHealth()
     {
