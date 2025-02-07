@@ -36,7 +36,11 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("LoseScreen");
         }
 
-        MakeBowText();
+        if (bowPickUpText != null)
+        {
+            MakeBowText();
+        }
+        
     }
 
     public void HealthText(float currentHealth)
