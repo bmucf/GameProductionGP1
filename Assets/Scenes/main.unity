@@ -815,6 +815,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3913343476229919584, guid: 681839767c687144f918a738d2a7490f, type: 3}
+      propertyPath: rotationSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913343476229919584, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: activationDistance
       value: 10
       objectReference: {fileID: 0}
@@ -2676,6 +2680,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 518532075028072225, guid: 681839767c687144f918a738d2a7490f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.768364
@@ -2719,6 +2727,10 @@ PrefabInstance:
     - target: {fileID: 2959547434982592514, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913343476229919584, guid: 681839767c687144f918a738d2a7490f, type: 3}
+      propertyPath: rotationSpeed
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5196145388720422479, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_Layer
@@ -6788,6 +6800,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 518532075028072225, guid: 681839767c687144f918a738d2a7490f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 802951720721031384, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.35
@@ -6831,6 +6847,10 @@ PrefabInstance:
     - target: {fileID: 2959547434982592514, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913343476229919584, guid: 681839767c687144f918a738d2a7490f, type: 3}
+      propertyPath: rotationSpeed
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5196145388720422479, guid: 681839767c687144f918a738d2a7490f, type: 3}
       propertyPath: m_Layer
