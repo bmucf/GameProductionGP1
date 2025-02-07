@@ -9,12 +9,18 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player;
     public TextMeshProUGUI HPText;
-    
+    public TextMeshProUGUI bowPickUpText;
+    public GameObject bowPickUp;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HPText.text = "HP: " + GameObject.Find("Player").GetComponent<Player>().health;
+        if (bowPickUpText != null)
+        {
+            bowPickUpText.text = "";
+        }
     }
 
     // Update is called once per frame
@@ -29,6 +35,8 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("LoseScreen");
         }
+
+        MakeBowText();
     }
 
     public void HealthText(float currentHealth)
@@ -40,5 +48,34 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Exiting the game!");
         Application.Quit();
+    }
+
+    void MakeBowText()
+    {
+        if (bowPickUp == null)
+        {
+            return;
+        }
+
+        if (bowPickUp.GetComponent<BowPickUp>().isActivated == true)
+        {
+            Debug.Log("Bow is Activated");
+
+            if (bowPickUpText != null)
+            {
+                Debug.Log("Text is Created");
+                bowPickUpText.text = "YOU GOT THE CROSSBOW";
+                Invoke("DeleteText", 2f);
+            }
+        }
+    }
+
+    void DeleteText()
+    {
+        if (bowPickUpText != null)
+        {
+            bowPickUpText.text = "";
+        }
+
     }
 }
