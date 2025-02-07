@@ -8,14 +8,14 @@ public class SwordAttack : MonoBehaviour
     public Transform spinAttackPoint;
     public float slashAttackRange = 1.5f;
     public int slashAttackDmg = 2;
-    public float spinAttackRange = 2f;
+    public float spinAttackRange = 2.5f;
     public int spinAttackDmg = 1;
 
     public LayerMask attackable;
 
     public GameObject swordPrefab;
     public float swordSpawnDistance = .5f;
-    public float swordLifetime = .1f;
+    public float swordLifetime = .25f;
     public int numSpinSwords = 8;
     public float spinRadius = 1f;
 

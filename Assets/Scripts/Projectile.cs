@@ -40,6 +40,7 @@ public class Projectile : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
+                if (player.GetComponent<Player>().isBlocking == false)
                 player.TakeDamage(1);
             }
 
