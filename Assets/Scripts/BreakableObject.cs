@@ -19,7 +19,7 @@ public class BreakableObject : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log("Destroyed!");
-        Instantiate(Heart, transform.position, Quaternion.identity);
+        Instantiate(Heart, transform.position, Quaternion.identity * Heart.transform.rotation);
         Debug.Log("Spawned Heart");
     }
 }
