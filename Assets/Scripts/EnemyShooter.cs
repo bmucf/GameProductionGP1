@@ -13,7 +13,6 @@ public class EnemyShooter : MonoBehaviour
     private bool isActivated = false;
 
     public int health = 2;
-    private float rotationSpeed = 200;
 
     void Start()
     {
@@ -43,18 +42,18 @@ public class EnemyShooter : MonoBehaviour
     }
 
     void RotateTowardsPlayer()
-{
-    Vector3 direction = (playerTransform.position - transform.position).normalized;
-
-    direction.y = 0;
-
-    if (direction != Vector3.zero)
     {
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 200 * Time.deltaTime);
+        }
     }
-}
 
     void ShootProjectile()
     {
