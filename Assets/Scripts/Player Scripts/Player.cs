@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
         {
 
             shootingTime = Time.time + arrowShotCooldown;
-            Vector3 spawnPosition = transform.position + (transform.forward * projectileSpawnDistance);
+            Vector3 spawnPosition = transform.position + (transform.up * 1f) + (transform.forward * projectileSpawnDistance);
             // Debug.Log("spawn Position: " + spawnPosition + "projectileSpawnDist: " + projectileSpawnDist);
             Instantiate(arrow, spawnPosition, (transform.rotation * arrow.transform.rotation));
 
