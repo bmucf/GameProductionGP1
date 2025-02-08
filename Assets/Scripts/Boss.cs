@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour
     private bool hasActivated = false;
     private float initialY;
 
-    public int health = 20; 
+    public int health = 20;
 
     void Start()
     {
@@ -31,12 +31,15 @@ public class Boss : MonoBehaviour
             hasActivated = true;
             isCharging = true;
             chargeDirection = (player.position - transform.position).normalized;
-            Debug.Log("Boss has been activated and starts charging.");
         }
 
         if (isCharging)
         {
             Charge();
+        }
+        else
+        {
+            RotateTowardsPlayer();
         }
     }
 
@@ -45,7 +48,7 @@ public class Boss : MonoBehaviour
         Vector3 newPosition = transform.position + chargeDirection * moveSpeed * Time.deltaTime;
         newPosition.y = initialY;
         transform.position = newPosition;
-       
+
         if (Physics.Raycast(transform.position, chargeDirection, 1f, wallLayer))
         {
             isCharging = false;
@@ -60,6 +63,18 @@ public class Boss : MonoBehaviour
         chargeDirection = (player.position - transform.position).normalized;
 
         isCharging = true;
+    }
+
+    void RotateTowardsPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 200 * Time.deltaTime);
+        }
     }
 
     void OnTriggerEnter(Collider other)
